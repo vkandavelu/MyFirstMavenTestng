@@ -12,6 +12,7 @@ public class MyFirstTest {
         System.out.println("Test 1 pass "+msg);
         System.out.println("Test 1 pass with id"+id);
         System.out.println("Test 1 pass with id"+id+" "+msg);
+        System.out.println("Test 1 pass with id check"+id+" "+msg);
     }
     @Test
     public void test2()
