@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.example</groupId>
+    <artifactId>MylearningMavenTestng</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>jenkins</id>
+        </profile>
+        <profile>
+            <id>prototype</id>
+            <!-- Use these profiles to run tests against different environments -->
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <env>prototype</env>
+                <ux>https://dlg-sit2.ssp-hosting.com/DirectLineVanCD</ux>
+                <select>https://dlg-sit2.ssp-hosting.com/DLGCD/TechnologyFrameworksWeb</select>
+                <pricing>https://pre-uat.ssp-hosting.com/pre/executor.asmx</pricing>
+                <preinstance>PRE_UAT</preinstance>
+                <iqh>https://iqh-uat.ssp-hosting.com/uat/v2_i1/soap/DLG/motor</iqh>
+                <iqhauthheader>Basic dWF0X3NzcF9jb21kbGc6OTMzMTRjZDktNDBkNS00MmIxLTljYTItYzRkNWQ4N2I5ZGRlCg==</iqhauthheader>
+                <ec>https://dlg-sit2.ssp-hosting.com/DLG-ECCD</ec>
+                <paymenthub>https://test-eu-west-1.phubtest.ssp-cloud.com/PaymentHub/IntegrationService.asmx</paymenthub>
+                <mule>https://dlg-sit2.ssp-hosting.com/MuleServicesCD/v1</mule>
+                <ss>https://dlg-sit2.ssp-hosting.com/DLG-SSCCD</ss>
+                <ccm>DLGCD</ccm>
+            </properties>
+        </profile>
+        <profile>
+            <id>CT2</id>
+            <properties>
+                <env>stageCT2</env>
+                <ux>http://10.0.1.180:8080/DirectLineVan/CT2</ux>
+                <select>https://dlg-sit.ssp-hosting.com/DLGCT2/TechnologyFrameworksWeb</select>
+                <pricing>https://pre-uat.ssp-hosting.com/pre/executor.asmx</pricing>
+                <preinstance>PRE_PGSTE</preinstance>
+                <iqh>https://iqh-ste.ssp-hosting.com/PgSte/V2_I1/soap/DLG/motor</iqh>
+                <iqhauthheader>Basic cGdzdGVfc3NwX2NvbWRsZzpkNGZhNDgyNi01ODNlLTQ0ZTMtYjNiNi1iMzVlNmM3OGQ2NGM=</iqhauthheader>
+                <ec>https://dlg-sit.ssp-hosting.com/DLG-ECCT2</ec>
+                <paymenthub>https://test-eu-west-1.phubtest.ssp-cloud.com/PaymentHub/IntegrationService.asmx</paymenthub>
+                <mule>https://dlg-sit.ssp-hosting.com/MuleServicesCT2/v1</mule>
+                <ss>https://dlg-sit.ssp-hosting.com/DLG-SSCCT2</ss>
+                <ccm>DLGCT</ccm>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>CD2</id>
+            <properties>
+                <env>stageCT2</env>
+                <ux>http://10.0.1.180:8080/DirectLineVan/CD2</ux>
+                <select>https://dlg-sit.ssp-hosting.com/DLGCT2/TechnologyFrameworksWeb</select>
+                <pricing>https://pre-uat.ssp-hosting.com/pre/executor.asmx</pricing>
+                <preinstance>PRE_PGSTE</preinstance>
+                <iqh>https://iqh-ste.ssp-hosting.com/PgSte/V2_I1/soap/DLG/motor</iqh>
+                <iqhauthheader>Basic cGdzdGVfc3NwX2NvbWRsZzpkNGZhNDgyNi01ODNlLTQ0ZTMtYjNiNi1iMzVlNmM3OGQ2NGM=</iqhauthheader>
+                <ec>https://dlg-sit.ssp-hosting.com/DLG-ECCT2</ec>
+                <paymenthub>https://test-eu-west-1.phubtest.ssp-cloud.com/PaymentHub/IntegrationService.asmx</paymenthub>
+                <mule>https://dlg-sit.ssp-hosting.com/MuleServicesCT2/v1</mule>
+                <ss>https://dlg-sit.ssp-hosting.com/DLG-SSCCT2</ss>
+                <ccm>DLGCT</ccm>
+            </properties>
+        </profile>
+    </profiles>
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>4.1.1</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.testng/testng -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.5</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>3.0.0-M2</version>
+            <configuration>
+                <suiteXmlFiles>
+                    <suiteXmlFile>testng.xml</suiteXmlFile>
+                </suiteXmlFiles>
+               <systemPropertyVariables>
+                   <!--suppress UnresolvedMavenProperty -->
+                   <profileId>${env}</profileId>
+                   <name >Venkat</name>
+                   <!--suppress UnresolvedMavenProperty -->
+                   <UX>${ux}</UX>
+                   <!--suppress UnresolvedMavenProperty -->
+                   <SELECT>${select}</SELECT>
+               </systemPropertyVariables>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
+
+
+</project>
