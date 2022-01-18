@@ -21,6 +21,6 @@ public class MyFirstTest {
     public void test2()
     {
         System.out.println("Test 2 pass "+msg);
-        System.out.println("My add");
+        System.out.println("My add ,,,");
     }
 }
